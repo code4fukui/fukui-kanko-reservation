@@ -63,6 +63,7 @@ const showChart = (bindto, columns) => {
       columns,
       axes: {
         "利用合計": "y2",
+        "客平均単価": "y2",
         "客室平均単価": "y2",
         "RevPAR": "y2",
       },
@@ -98,16 +99,21 @@ const show = async () => {
   
   //const occ = ["客室稼働率"];
   const adr = ["客室平均単価"];
+  const adr2 = ["客平均単価"];
   //const revpar = ["RevPAR"];
   for (let i = 1; i < columns[0].length; i++) {
-    const room = columns[1]; // 室数
+    // columns[0] // date
+    const people = columns[1]; // 人数
+    const room = columns[2]; // 室数
     const amount = columns[4]; // 利用合計
     //occ[i] = (parseInt(room[i]) / capacity * 100).toFixed(1);
     adr[i] = (parseInt(amount[i]) / parseInt(room[i])).toFixed(0);
+    adr2[i] = (parseInt(amount[i]) / parseInt(people[i])).toFixed(0);
     //revpar[i] = (occ[i] / 100 * adr[i]).toFixed(0);
   }
   //columns.push(occ);
   columns.push(adr);
+  columns.push(adr2);
   //columns.push(revpar);
   //([occ, adr, revpar]);
   
