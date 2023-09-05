@@ -77,7 +77,12 @@ const showChart = (bindto, columns) => {
       y2: {
         show: true,
       },
-    }
+    },
+    tooltip: {
+      format: {
+        value: (value) => d3.format(",")(value),
+      }
+    },
   });
 };
 
