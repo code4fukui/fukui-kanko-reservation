@@ -118,6 +118,7 @@ const show = async () => {
   //([occ, adr, revpar]);
   
   showChart("chart", columns);
+  span_date.textContent = new Day(columns[0][1]).toString();
 };
 show();
 
@@ -125,7 +126,7 @@ show();
 
 <div class=caption>
 福井県あわら温泉エリア、8つのホテルの予約状況を合算したオープンデータです。<br>
-「<a href=latest_rsv_sum.csv>CSVオープンデータ ダウンロード</a>」（2023/9/4現在）
+「<a href=latest_rsv_sum.csv>CSVオープンデータ ダウンロード</a>」（<span id=span_date></span>現在）
 </div>
 <a href=https://code4fukui.github.io/fukui-kanko-advice/area/11.html>福井県AI観光アドバイス - あわら湯のまち エリア</a><br>
 <br>
