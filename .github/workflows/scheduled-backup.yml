@@ -16,9 +16,9 @@ jobs:
           deno-version: v1.x
       - name: make
         env:
-          SECRET_URL: ${{ secrets.secret }}
+          SECRET: ${{ secrets.secret }}
         run: |
-          deno run -A -r update.js $SECRET_URL
+          deno run -A -r update.js $SECRET
       - name: commit and push
         run: |
           git config --global user.email "workflow@example.com"
