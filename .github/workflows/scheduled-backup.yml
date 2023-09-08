@@ -16,7 +16,7 @@ jobs:
           deno-version: v1.x
       - name: make
         env:
-          SECRET_URL: ${{ SECRET_URL }}
+          SECRET_URL: ${{ secrets.SECRET_URL }}
         run: |
           deno run -A -r update.js $SECRET_URL
       - name: commit and push
