@@ -18,7 +18,7 @@ const getFile = async (fn) => {
   const map = {
     "n_room": "室数",
     "n_people": "利用総人数",
-    "n_stay": "泊数",
+    "n_stay": "平均泊数",
     "amount_fee": "利用合計",
     "n_reserve": "予約件数",
     "date_visit": "利用開始日",
@@ -94,13 +94,17 @@ const showChart = (bindto, columns) => {
 };
 
 const show = async () => {
-  const colnames = ["利用総人数", "室数", "泊数", NAME_FEE];
+  const colnames = ["利用総人数", "室数", "平均泊数", NAME_FEE];
   
   const data = await getFile();
   console.log(data);
   const startday = new Day(data[0].利用開始日);
   
   const columns = makeColumns(data, startday, colnames);
+  // 平均泊数
+  for (let i = 1 ; i < columns[3].length ; i++ ) {
+    columns[3][i] = (parseInt(columns[3][i]) / parseInt(data[i-1]["予約件数"]) ).toFixed(2);
+  }
   console.log("columns", columns);
   
   const occ = [NAME_OCC];
