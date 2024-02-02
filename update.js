@@ -5,6 +5,7 @@ const domain = Deno.args[0];
 const getLatestHotelApi = domain + Deno.args[1];
 const getLatestRsvSumApi = domain + Deno.args[2];
 const getLatestRsvPrefectureSumApi = domain + Deno.args[3];
+const getBookingCurveApi = domain + Deno.args[4];
 
 const hotelData = await (await fetch(getLatestHotelApi)).json();
 await Deno.writeTextFile("latest_hotel.csv", CSV.stringify(hotelData));
