@@ -19,3 +19,6 @@ await Deno.writeTextFile("data/" + new Day(TimeZone.JST).toString() + ".csv", CS
 
 const latestRsvPrefectureSumData = await (await fetch(getLatestRsvPrefectureSumApi)).json();
 await Deno.writeTextFile("latest_rsv_prefecture_sum.csv", CSV.stringify(latestRsvPrefectureSumData));
+
+const latestBookingCurveData = await (await fetch(getBookingCurveApi)).json();
+await Deno.writeTextFile("booking_curve.csv", CSV.stringify(latestBookingCurveData));
