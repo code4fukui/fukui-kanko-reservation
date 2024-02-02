@@ -17,7 +17,7 @@ jobs:
           deno-version: v1.x
       - name: make
         run: |
-          deno run -A -r update.js ${{ secrets.domain }} ${{ secrets.get_latest_hotel_api }} ${{ secrets.get_latest_rsv_sum_api }} ${{ secrets.get_latest_rsv_prefecture_sum_api }}
+          deno run -A -r update.js ${{ secrets.domain }} ${{ secrets.get_latest_hotel_api }} ${{ secrets.get_latest_rsv_sum_api }} ${{ secrets.get_latest_rsv_prefecture_sum_api }} ${{ secrets.get_booking_curve_api }}
       - name: commit and push
         run: |
           git config --global user.email "workflow@example.com"
