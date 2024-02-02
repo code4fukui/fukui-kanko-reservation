@@ -39,6 +39,7 @@
 <script type="module">
 import { CSV } from "https://js.sabae.cc/CSV.js";
 import { Day } from "https://js.sabae.cc/DateTime.js";
+import { downloadFile } from "https://js.sabae.cc/downloadFile.js";
 import { initC3 } from "https://code4fukui.github.io/c3-es/c3-es.js";
 const c3 = initC3(window);
 
@@ -417,11 +418,36 @@ barChartCategory.onchange = () => loadBarChart(fromDate.value, toDate.value, bar
 show(fromDate.value, toDate.value);
 loadBarChart(fromDate.value, toDate.value, barChartCategory.value);
 loadBookingCurve(fromDate.value, toDate.value);
+
+// download csv
+dl_csv.onclick = async (e) => {
+  e.preventDefault();
+  const fn = "latest_rsv_sum.csv";
+  const data = await CSV.fetchJSON(fn);
+  //const capacity = parseInt(totalRoomCount.textContent);
+  //console.log(hotelData); 
+  data.forEach(i => {
+    const capacity = hotelData.reduce((pre, j) => {
+      if (new Day(i.date_visit).isBefore(new Day(j.create_file_begin_date))) {
+        return pre;
+      }
+      return pre + parseInt(j.nrooms);
+    }, 0);
+
+    // n_stay	n_people	n_room	amount_fee	n_reserve
+    i.n_capacity = capacity;
+    i.OCC = (i.n_room / capacity * 100).toFixed(2) + "%";
+    i.ADR = (i.amount_fee / i.n_room).toFixed(0);
+    i.RevPAR = (i.amount_fee / capacity).toFixed(0);
+  });
+  const bin = new TextEncoder().encode(CSV.stringify(data));
+  downloadFile("latest_rsv_sum.csv", bin);
+};
 </script>
 
 <div class=caption>
 福井県あわら温泉エリア、<span id="totalHotelCount"></span>のホテル（総部屋数<span id="totalRoomCount"></span>）の予約状況を合算したオープンデータです。<br>
-「<a href=latest_rsv_sum.csv>CSVオープンデータ ダウンロード</a>」（<span id=span_date></span>現在）<br>
+「<a href=latest_rsv_sum.csv>CSVオープンデータ ダウンロード</a>（<a id=dl_csv href=#>OCC/ADR/RevPAR付きCSV</a>）」（<span id=span_date></span>現在）<br>
 <br>
 客室稼働率 OCC = Occupancy Ratio = 予約客室数 / 総客室数<br>
 客室平均単価 ADR = Average Daily Rate = 販売額 / 予約客室数<br>
