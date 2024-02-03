@@ -377,7 +377,7 @@ const show = async (startDate, endDate) => {
       occ[i] = (parseInt(room[i]) / capacity * 100).toFixed(1);
       adr[i] = (parseInt(amount[i]) / parseInt(room[i])).toFixed(0);
       adr2[i] = (parseInt(amount[i]) / parseInt(people[i])).toFixed(0);
-      revpar[i] = (occ[i] / 100 * adr[i]).toFixed(0);
+      revpar[i] = (parseInt(amount[i]) / capacity).toFixed(0);
     }
   }
   columns.push(adr2);
