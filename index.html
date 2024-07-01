@@ -26,7 +26,7 @@
   <div id=barChartContent class="tab-pane fade show">
     項目：<select id="barChartCategory" class="my-2">
       <option selected>利用総人数</option>
-      <option>利用合計</option>
+      <option>利用金額合計</option>
     </select>
     <div id="barChart"></div>
   </div>
@@ -69,7 +69,7 @@ const getChartFile = async (targetDate) => {
     "n_room": "室数",
     "n_people": "利用総人数",
     "n_stay": "平均泊数",
-    "amount_fee": "利用合計",
+    "amount_fee": "利用金額合計",
     "n_reserve": "予約件数",
     "date_visit": "利用開始日",
   };
@@ -87,7 +87,7 @@ const getBarChartFile = async (targetDate) => {
     "n_room": "室数",
     "n_people": "利用総人数",
     "n_stay": "平均泊数",
-    "amount_fee": "利用合計",
+    "amount_fee": "利用金額合計",
     "n_reserve": "予約件数",
     "date_visit": "利用開始日",
   };
@@ -218,7 +218,7 @@ const makeBookingCurveColumns = (data, startday, endday) => {
   return columns;
 };
 
-const NAME_FEE = "利用合計";
+const NAME_FEE = "利用金額合計";
 const NAME_OCC = "客室稼働率 (OCC)";
 const NAME_ADR = "客室平均単価 (ADR)";
 const NAME_AVE = "客平均単価";
@@ -362,7 +362,7 @@ const show = async (startDate, endDate) => {
     // columns[0] // date
     const people = columns[1]; // 人数
     const room = columns[2]; // 室数
-    const amount = columns[4]; // 利用合計
+    const amount = columns[4]; // 利用金額合計
     if (room[i] == 0) {
       occ[i] = "";
       adr[i] = "";
@@ -446,12 +446,12 @@ dl_csv.onclick = async (e) => {
 </script>
 
 <div class=caption>
-福井県あわら温泉エリア、<span id="totalHotelCount"></span>のホテル（総部屋数<span id="totalRoomCount"></span>）の予約状況を合算したオープンデータです。<br>
+福井県あわら温泉エリア、<span id="totalHotelCount"></span>のホテル（総客室数<span id="totalRoomCount"></span>）の予約状況を合算したオープンデータです。<br>
 「<a href=latest_rsv_sum.csv>CSVオープンデータ ダウンロード</a>（<a id=dl_csv href=#>OCC/ADR/RevPAR付きCSV</a>）」（<span id=span_date></span>現在）<br>
 <br>
 客室稼働率 OCC = Occupancy Ratio = 予約客室数 / 総客室数<br>
 客室平均単価 ADR = Average Daily Rate = 販売額 / 予約客室数<br>
-RevPAR = Revenue Per Available Rooms = 販売額 / 総客室数 = OCC x ADR<br>
+RevPAR = Revenue Per Available Rooms = OCC x ADR<br>
 </div>
 <a href=https://code4fukui.github.io/fukui-kanko-advice/area/11.html>福井県AI観光アドバイス - あわら湯のまち エリア</a><br>
 <br>
