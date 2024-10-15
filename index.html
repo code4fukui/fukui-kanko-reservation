@@ -39,6 +39,7 @@
 <script type="module">
 import { CSV } from "https://js.sabae.cc/CSV.js";
 import { Day } from "https://js.sabae.cc/DateTime.js";
+import { TimeZone } from "https://code4fukui.github.io/day-es/DateTime.js";
 import { downloadFile } from "https://js.sabae.cc/downloadFile.js";
 import { initC3 } from "https://code4fukui.github.io/c3-es/c3-es.js";
 const c3 = initC3(window);
@@ -386,7 +387,11 @@ const show = async (startDate, endDate) => {
   columns.push(revpar);
   showChart("#chart", columns);
   
-  span_date.textContent = new Day(columns[0][1]).toString();
+  const today = new Day(TimeZone.JST);
+  const spanDateElements = document.getElementsByClassName("span-date");
+  Array.from(spanDateElements).forEach(element => {
+    element.innerText = `${today.year}年${today.month}月${today.day}日`;
+  });
 };
 
 const loadBarChart = (startDate, endDate, category) => {
@@ -446,8 +451,8 @@ dl_csv.onclick = async (e) => {
 </script>
 
 <div class=caption>
-福井県あわら温泉エリア、<span id="totalHotelCount"></span>のホテル（総客室数<span id="totalRoomCount"></span>）の予約状況を合算したオープンデータです。<br>
-「<a href=latest_rsv_sum.csv>CSVオープンデータ ダウンロード</a>（<a id=dl_csv href=#>OCC/ADR/RevPAR付きCSV</a>）」（<span id=span_date></span>現在）<br>
+福井県あわら温泉エリア、<span id="totalHotelCount"></span>のホテル（総客室数<span id="totalRoomCount"></span>）の予約状況を合算したオープンデータです。（部屋数は<span class="span-date"></span>時点です）<br>
+「<a href=latest_rsv_sum.csv>CSVオープンデータ ダウンロード</a>（<a id=dl_csv href=#>OCC/ADR/RevPAR付きCSV</a>）」（<span class="span-date"></span>現在）<br>
 <br>
 客室稼働率 OCC = Occupancy Ratio = 予約客室数 / 総客室数<br>
 客室平均単価 ADR = Average Daily Rate = 販売額 / 予約客室数<br>
