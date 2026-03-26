@@ -1,23 +1,36 @@
 # fukui-kanko-reservation
-こちらが日本語版READMEです: [README.ja.md](README.ja.md)
 
-福井県芦原温泉エリアの予約データの可視化。
+> English README: [README.md](README.md)
+あわら温泉エリア 宿泊予約状況（データ出典：福井県観光連盟）
 
-## デモ
-https://code4fukui.github.io/fukui-kanko-reservation/
+**Live demo**: https://code4fukui.github.io/fukui-kanko-reservation/
 
-## 機能
+## Features
 
-- 阿波羅温泉エリアの総予約データを表示
-- 都道府県別予約数の内訳を提供 (ベータ版)
-- 予約曲線の可視化を含む (ベータ版)
+- CSV data parsing
 
-## データ/API
-この プロジェクトは 福井県観光連盟が提供する 以下のAPIからデータを取得しています:
-- 最新のホテル情報
-- 最新の予約サマリー
-- 最新の都道府県別予約サマリー 
-- 最新の予約カーブデータ
+## Technology Stack
 
-## ライセンス
-このプロジェクトは [MIT License](LICENSE) のもとで公開されています。
+**Browser modules (ES imports):**
+
+- [`CSV.js`](https://js.sabae.cc/CSV.js)
+- [`DateTime.js`](https://js.sabae.cc/DateTime.js)
+- [`DateTime.js`](https://code4fukui.github.io/day-es/DateTime.js)
+- [`downloadFile.js`](https://js.sabae.cc/downloadFile.js)
+
+
+## Project Structure
+
+- `data/` — データファイルとフィクスチャー
+
+## インストール & セットアップ
+
+ビルドステップは不要です。リポジトリをクローンし、`index.html` をブラウザで開くか、https://code4fukui.github.io/fukui-kanko-reservation/ からライブデモをご覧ください。
+
+## Contributing
+
+貢献は歓迎します。GitHubでissueまたはpull requestを開いてください。
+
+## License
+
+MIT License。詳細は [LICENSE](LICENSE) をご覧ください。
