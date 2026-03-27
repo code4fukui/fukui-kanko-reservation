@@ -2,10 +2,7 @@
 
 > 日本語のREADMEはこちらです: [README.ja.md](README.ja.md)
 
-
 あわら温泉エリア 宿泊予約状況（データ出典：福井県観光連盟）
-
-**Live demo**: https://code4fukui.github.io/fukui-kanko-reservation/
 
 ## Features
 
@@ -20,7 +17,6 @@
 - [`DateTime.js`](https://code4fukui.github.io/day-es/DateTime.js)
 - [`downloadFile.js`](https://js.sabae.cc/downloadFile.js)
 
-
 ## Project Structure
 
 - `data/` — Data files and fixtures
@@ -28,7 +24,7 @@
 ## Installation & Setup
 
 No build step required. Clone the repository and open `index.html` in a browser,
-or visit the live demo at https://code4fukui.github.io/fukui-kanko-reservation/
+
 
 ## Contributing
 
