@@ -7,10 +7,19 @@ const getLatestRsvSumApi = domain + Deno.args[2];
 const getLatestRsvPrefectureSumApi = domain + Deno.args[3];
 const getBookingCurveApi = domain + Deno.args[4];
 
-const hotelData = await (await fetch(getLatestHotelApi)).json();
+const key = await Deno.readTextFile(Deno.args[5]);
+const cert = await Deno.readTextFile(Deno.args[6]);
+const client = Deno.createHttpClient({ key, cert });
+
+const opt = {
+  client,
+  method: "GET",
+};
+
+const hotelData = await (await fetch(getLatestHotelApi, opt)).json();
 await Deno.writeTextFile("latest_hotel.csv", CSV.stringify(hotelData));
 
-const latestRsvSumData = await (await fetch(getLatestRsvSumApi)).json();
+const latestRsvSumData = await (await fetch(getLatestRsvSumApi, opt)).json();
 await Deno.writeTextFile("latest_rsv_sum.csv", CSV.stringify(latestRsvSumData));
 
 const backupLatestRsvSumData = latestRsvSumData.filter(d => {
@@ -18,8 +27,8 @@ const backupLatestRsvSumData = latestRsvSumData.filter(d => {
 });
 await Deno.writeTextFile("data/" + new Day(TimeZone.JST).toString() + ".csv", CSV.stringify(backupLatestRsvSumData));
 
-const latestRsvPrefectureSumData = await (await fetch(getLatestRsvPrefectureSumApi)).json();
+const latestRsvPrefectureSumData = await (await fetch(getLatestRsvPrefectureSumApi, opt)).json();
 await Deno.writeTextFile("latest_rsv_prefecture_sum.csv", CSV.stringify(latestRsvPrefectureSumData));
 
-const latestBookingCurveData = await (await fetch(getBookingCurveApi)).json();
+const latestBookingCurveData = await (await fetch(getBookingCurveApi, opt)).json();
 await Deno.writeTextFile("booking_curve.csv", CSV.stringify(latestBookingCurveData));
